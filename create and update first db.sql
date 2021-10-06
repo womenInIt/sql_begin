@@ -5,6 +5,7 @@ CREATE TABLE accounts (
     price Numeric 
 );
 
+
 INSERT INTO accounts (name, goods, price) VALUES ('John', 'banana', 20);
 INSERT INTO accounts (name, goods, price) VALUES ('Mike', 'banana', 30);
 INSERT INTO accounts (name, goods, price) VALUES ('Bill', 'apple', 10);
