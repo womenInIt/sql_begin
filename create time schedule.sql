@@ -15,5 +15,37 @@ CREATE TABLE Schedule (
     TimeStart time not null,
     TimeFinish time not null,
     TaskId serial not null, 
-    UserId serial not null
+    OperantId serial not null,
+    CONSTRAINT FK_Task
+        FOREIGN KEY(TaskId) 
+	    REFERENCES Task(Id)
+	    ON DELETE SET NULL, 
+    CONSTRAINT FK_Operant
+        FOREIGN KEY(OperantId) 
+	    REFERENCES Operant(Id)
+	    ON DELETE SET NULL    
 );
+
+-----Operant-----
+INSERT INTO public.operant(name, password, description)	VALUES ('Olga', 'somePwd', null);
+INSERT INTO public.operant(name, password, description)	VALUES ('Sergejs', 'someOtherPwd', 'user');
+
+-----Schedule-----
+INSERT INTO public.schedule(date, timestart, timefinish, taskid, operantid)	VALUES ('2021-10-12','7:00','7:30',1,1);
+INSERT INTO public.schedule(date, timestart, timefinish, taskid, operantid)	VALUES ('2021-10-12','7:30','8:00',2,1);
+INSERT INTO public.schedule(date, timestart, timefinish, taskid, operantid)	VALUES ('2021-10-12','8:00','12:00',3,1);
+INSERT INTO public.schedule(date, timestart, timefinish, taskid, operantid)	VALUES ('2021-10-12','12:30','16:30',4,1);
+
+
+---Select---
+SELECT 
+	public.operant.name,
+	public.task.name,
+	date, 
+	timestart, 
+	timefinish
+
+	FROM public.schedule
+		join public.task on public.task.Id = public.schedule.taskid 
+		join public.operant on public.operant.Id = public.schedule.OperantId 
+		;
