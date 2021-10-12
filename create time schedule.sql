@@ -16,15 +16,21 @@ CREATE TABLE Schedule (
     TimeFinish time not null,
     TaskId serial not null, 
     OperantId serial not null,
-    CONSTRAINT FK_Task
+);
+
+-----Tables relations---
+
+alter table Schedule
+add CONSTRAINT FK_Task
         FOREIGN KEY(TaskId) 
 	    REFERENCES Task(Id)
-	    ON DELETE SET NULL, 
-    CONSTRAINT FK_Operant
+	    ON DELETE SET NULL;
+		
+alter table Schedule
+add CONSTRAINT FK_Operant
         FOREIGN KEY(OperantId) 
 	    REFERENCES Operant(Id)
-	    ON DELETE SET NULL    
-);
+	    ON DELETE SET NULL; 
 
 -----Operant-----
 INSERT INTO public.operant(name, password, description)	VALUES ('Olga', 'somePwd', null);
