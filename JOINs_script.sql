@@ -64,3 +64,58 @@ INSERT INTO Works (work_id, work_date, timeStart, timeFinish, user_id, task_id) 
 INSERT INTO Works (work_id, work_date, timeStart, timeFinish, user_id, task_id) VALUES (9, current_timestamp, current_timestamp, current_timestamp + (60 * interval '1 minute'), 9, 4);
 INSERT INTO Works (work_id, work_date, timeStart, timeFinish, user_id, task_id) VALUES (10, current_timestamp, current_timestamp, current_timestamp + (60 * interval '1 minute'), 10, 3);
 
+
+--- INNER JOIN --
+SELECT
+    Users.firstName,
+    Users.lastName,
+    Tasks.task_tag,
+    Tasks.description,
+    work_date,
+    timeStart,
+    timeFinish
+FROM Works
+         JOIN Tasks ON Tasks.task_id = Works.task_id
+         JOIN Users ON Users.user_id = Works.user_id
+;
+
+
+--- RIGHT JOIN ---
+SELECT
+    Tasks.task_tag,
+    Tasks.description,
+    work_date,
+    timeStart,
+    timeFinish
+FROM Works
+        RIGHT JOIN Tasks
+                   ON Tasks.task_id = Works.task_id
+;
+
+--- LEFT JOIN ---
+SELECT
+    Tasks.task_tag,
+    Tasks.description,
+    work_date,
+    timeStart,
+    timeFinish
+FROM Works
+        LEFT JOIN Tasks
+                   ON Tasks.task_id = Works.task_id
+;
+
+--- FULL OUTER JOIN ---
+SELECT
+    Users.firstName,
+    Users.lastName,
+    Tasks.task_tag,
+    Tasks.description,
+    work_date,
+    timeStart,
+    timeFinish
+FROM Works
+        FULL OUTER JOIN Tasks
+                        ON Tasks.task_id = Works.task_id
+        FULL OUTER JOIN Users
+                        ON Users.user_id = Works.user_id
+;
